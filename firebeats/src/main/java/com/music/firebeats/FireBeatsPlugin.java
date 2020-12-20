@@ -277,7 +277,7 @@ public class FireBeatsPlugin extends Plugin
 	{
 		if (trackPlayer.getVolume() == 0)
 		{
-			client.setMusicVolume(0);
+			client.getPreferences().setClientMusicVolume(0);
 			previousTrack = nextTrack;
 			currentPlayerState = PLAYING_TRACK_STATE;
 		}
@@ -382,7 +382,7 @@ public class FireBeatsPlugin extends Plugin
 		if (track != null && track.link != null)
 		{
 			remixAvailable = true;
-			client.setMusicVolume(0);
+			client.getPreferences().setClientMusicVolume(0);
 			trackPlayer.setVolume(config.volume() - config.remixVolumeOffset());
 			Track finalTrack = track;
 			handlePlayThread = new Thread(() -> {
@@ -413,7 +413,7 @@ public class FireBeatsPlugin extends Plugin
 			remixAvailable = false;
 			if (config.playOriginalIfNoRemix() == true)
 			{
-				client.setMusicVolume(config.volume());
+				client.getPreferences().setClientMusicVolume(config.volume());
 				initializeTrack = false;
 			}
 		}
@@ -469,7 +469,7 @@ public class FireBeatsPlugin extends Plugin
 		{
 			try
 			{
-				client.setMusicVolume(0); // Attempt to force mute.
+				client.getPreferences().setClientMusicVolume(0); // Attempt to force mute.
 				comingFromLogin = true;
 
 				if (config.mute() == true)
@@ -595,7 +595,7 @@ public class FireBeatsPlugin extends Plugin
 		if (config.mute() == true)
 		{
 			trackPlayer.setVolume(0);
-			client.setMusicVolume(0);
+			client.getPreferences().setClientMusicVolume(0);
 		}
 		else
 		{
@@ -613,7 +613,7 @@ public class FireBeatsPlugin extends Plugin
 						trackPlayer.setVolume(config.volume() - config.remixVolumeOffset());
 					}
 
-					client.setMusicVolume(0);
+					client.getPreferences().setClientMusicVolume(0);
 				}
 			}
 			else
@@ -621,12 +621,12 @@ public class FireBeatsPlugin extends Plugin
 				if (config.playOriginalIfNoRemix() == true)
 				{
 					trackPlayer.setVolume(0);
-					client.setMusicVolume(config.volume());
+					client.getPreferences().setClientMusicVolume(config.volume());
 				}
 				else
 				{
 					trackPlayer.setVolume(0);
-					client.setMusicVolume(0);
+					client.getPreferences().setClientMusicVolume(0);
 				}
 			}
 		}

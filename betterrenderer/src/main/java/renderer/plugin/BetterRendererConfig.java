@@ -53,4 +53,9 @@ public interface BetterRendererConfig extends Config {
     default int gammaOffset() {
         return -20;
     }
+
+    @ConfigItem(keyName = "loadingCacheOverlay", name = "Loading cache overlay", description = "If enabled, an overlay will indicate when game caches are being downloaded")
+    default boolean loadingCacheOverlay() {
+        return true;
+    }
 }

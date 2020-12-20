@@ -38,6 +38,8 @@ import lombok.Getter;
 import lombok.Setter;
 import net.runelite.api.Client;
 import net.runelite.api.QuestState;
+import net.runelite.api.events.VarbitChanged;
+import net.runelite.api.events.WidgetLoaded;
 import net.runelite.client.eventbus.EventBus;
 import com.questhelper.steps.OwnerStep;
 import com.questhelper.steps.QuestStep;
@@ -78,6 +80,8 @@ public abstract class QuestHelper implements Module
 			currentStep = step;
 			currentStep.startUp();
 			//eventBus.register(currentStep);
+			eventBus.subscribe(VarbitChanged.class, currentStep, currentStep::onVarbitChanged);
+			eventBus.subscribe(WidgetLoaded.class, currentStep, currentStep::onWidgetLoaded);
 		}
 		else
 		{

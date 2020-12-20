@@ -457,6 +457,11 @@ public class QuestHelperPlugin extends Plugin
 		{
 			selectedQuest = questHelper;
 			//eventBus.register(selectedQuest);
+			eventBus.subscribe(MenuEntryAdded.class, this, this::onMenuEntryAdded);
+			eventBus.subscribe(MenuOptionClicked.class, this, this::onMenuOptionClicked);
+			eventBus.subscribe(VarbitChanged.class, this, this::onVarbitChanged);
+			eventBus.subscribe(GameStateChanged.class, this, this::onGameStateChanged);
+			eventBus.subscribe(GameTick.class, this, this::onGameTick);
 			selectedQuest.startUp();
 			if (selectedQuest.getCurrentStep() == null)
 			{

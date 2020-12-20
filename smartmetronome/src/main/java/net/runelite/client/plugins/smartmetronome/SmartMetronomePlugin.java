@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import net.runelite.api.Client;
+import net.runelite.api.Preferences;
 import net.runelite.api.InventoryID;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.ItemID;
@@ -654,20 +655,21 @@ public class SmartMetronomePlugin extends Plugin
 	{
 		if (++tickCounter % config.tickCount() == 0)
 		{
-			int previousVolume = client.getSoundEffectVolume();
+			Preferences preferences = client.getPreferences();
+			int previousVolume = preferences.getSoundEffectsVolume();
 
 			if (shouldTock && config.tockVolume() > 0)
 			{
-				client.setSoundEffectVolume(config.tockVolume());
+				preferences.setSoundEffectsVolume(config.tockVolume());
 				client.playSoundEffect(SoundEffectID.GE_DECREMENT_PLOP, config.tockVolume());
 			}
 			else if (config.tickVolume() > 0)
 			{
-				client.setSoundEffectVolume(config.tickVolume());
+				preferences.setSoundEffectsVolume(config.tickVolume());
 				client.playSoundEffect(SoundEffectID.GE_INCREMENT_PLOP, config.tickVolume());
 			}
 
-			client.setSoundEffectVolume(previousVolume);
+			preferences.setSoundEffectsVolume(previousVolume);
 
 			shouldTock = !shouldTock;
 		}

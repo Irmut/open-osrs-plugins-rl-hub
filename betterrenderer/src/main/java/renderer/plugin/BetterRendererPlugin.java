@@ -131,7 +131,9 @@ public class BetterRendererPlugin extends Plugin implements DrawCallbacks {
         // Download the cache
 
         initThread = new Thread(() -> {
-            overlayManager.add(loadingCacheOverlay);
+            if (config.loadingCacheOverlay()) {
+                overlayManager.add(loadingCacheOverlay);
+            }
 
             try {
                 Path xteaPath = RuneLite.RUNELITE_DIR.toPath().resolve("better-renderer/xtea.json");
